@@ -1,0 +1,139 @@
+---
+title: "Homework 1 Minh Cao"
+output:
+  pdf_document: default
+  html_document: default
+date: "2025-01-15"
+---
+
+### Question 1
+
+a.  There is a positive association between height of athlete and lenght of jump
+b.  There is a linear upward trend between two variable =\> we can use linear regression
+c.  Choice: 1. Reason: Positive and Upward
+d.  The response is quantitative, explanatory variable is also quantitative
+e.  Predited length of the jump is:
+
+```{r}
+X = 72
+yhat = 6.4285 + 1.0534*X
+yhat
+```
+
+f.  The slope of the linear equation
+g.  No
+h.  The coach cannot conclude that because this is an observational study, there might be a counfounding variable for the length of the jump (ie, diet, spleep, etc)
+i.  It will stay the same because we will still calculate the distance length in inches then convert it to feet
+j.  It will not stay the same because the scale of explanatory variable will change. This would lead change to the intercept
+k.  The correlation will stay the same. When we scale the y value (ie, convert it from inch to feet), the correlation result stay the same
+
+### Question 2
+
+a.  Yes, researcher could randomly assign participants to be in different group of amounts of time spent outside.
+b.  We cannot come to this conclusion because it is from an observational study. There can be confounding factors contribute to the decrease in blood pressure (ie, diet, stress level, etc)
+c.  Number of miles someone jogs each day could make someone go outside and expose to the nature, jogging also help reduces blood pressure =\> Confounding variable
+
+### Question 3
+
+Quantitative variable: BCPM, GPA, VR, PS, WS, BS, MCAT, Apps Categorical variable: Sex
+
+### Question 4
+
+a.  
+
+-   Response: reasoning scores
+-   explanatory variable: Sex
+
+b.  
+
+-   Response: AcceptStatus
+-   explanatory variable: Sex
+
+c.  
+
+-   Response: MCAT
+-   explanatory variable: GPA
+
+d.  
+
+-   Response: AcceptStatus
+-   explanatory variable: BCPM
+
+### Question 5
+
+```{r}
+data = read.csv("C:/Users/caoqu/OneDrive/PC/UCI/STUDY/WINTER_25/DATA_210P_Statistical_Methods_I/data/MedGPA.csv")
+head(data)
+
+```
+
+a.  
+
+```{r}
+accept_df = data[data$Accept == "A",]
+reject_df = data[data$Accept == "D",]
+
+print("Five number summary for GPA for admitted students")
+summary(accept_df$GPA)
+
+
+print("Five number summary for GPA for rejected students")
+summary(reject_df$GPA)
+```
+
+b.  
+
+-   Mean GPA of accepted group is about 3.693, while mean GPA of rejected group is 3.385.
+-   Min accepted GPA of admitted student is 3.140 while max GPA of rejected student is 3.770 =\> GPA is not the only factor
+
+#### Question 6
+
+a.  
+
+```{r}
+model = lm(MCAT~GPA, data = data)
+
+summary(model)
+```
+
+-   Estimated Regression equation: MCAT_hat = 3.923 + 9.104 \* GPA
+
+b.  
+
+SSE = Sum (yi - yhat_i)\*\*2 = Sum(Yi - (3.923 + 9.104\*Xi)\*\*2)
+
+c.  
+
+-   SLope: 9.104
+
+Interpretation: For one unit increase in GPA, the MCAT score increase by 9.104 points
+
+d.  
+
+-   The slope is 3.923
+
+Interpretation: When GPA = 0, the MCAT score is 3.923
+
+This interpretation is not meaningful
+
+e.  
+
+```{r}
+MCAT_30 = 3.923 + 9.104 * 3.0
+MCAT_40 = 3.923 + 9.104 * 4.0
+
+sprintf("Mcat score for 3.0 GPA: %f", MCAT_30)
+sprintf("Mcat score for 3.0 GPA: %f", MCAT_40)
+```
+
+f.  The difference is:
+
+```{r}
+9.104*2
+```
+
+g.  No, since is an observational study, there are many other factors that could contribute in increase MCAT score other than GPA
+
+#### Question 7
+
+-   Randomized experiments help negate the effect of confounder.
